@@ -39,13 +39,14 @@ This will build the Docker images (using development Dockerfiles when applicable
 Once the containers are running, you can access the services as follows:
 - MongoDB: Accessible internally or via GUI client like MongoDB Compass at localhost:27017
 - Express API:
-  - Test endpoint: http://localhost:3000/api/test-db
+  - Test endpoint: http://localhost:3000/api/test
   - The Express service uses nodemon for hot reloading in development. Changes to the code in the express/ directory are automatically detected and the express app will restart.
 - Flask API:
   - Test endpoint: http://localhost:5000/test-db
 - Vite-React Frontend (Development Mode)
   - Visit: http://localhost:5173
   - Hot reloading is enabled. Changes to the code in the vite-react/ directory will automatically update the UI in the browser.
+  - In development requests to /api are proxied to express on localhost:3000
 
 #### 4. Working with the Containers
 - Hot Reloading:
@@ -59,6 +60,14 @@ View logs in your terminal to see output from all services. Each service's logs 
 - Stopping the Environment:
 
 To stop the containers, press `CTRL-C` in the terminal where Docker Compose is running.
+
+##### 4.1 If you have trouble with installed packages not being recognized in the containers
+You may need to rebuild the images:
+```
+docker-compose down
+docker-compose build --no-cache
+docker-compose up
+```
 
 #### 5. Switching to Production Mode
 
